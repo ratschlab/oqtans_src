@@ -16,16 +16,16 @@ cd $basedir
 source ../oqtans_conf.sh
 
 reldir=oqtans_src-${version}
-if [ -d ${reldir} ] ;
+if [ -d oqtans_src ] ;
 then
-	echo ${reldir} already exists
+	echo oqtans_src already exists
 	exit -1
 fi
 
 echo ${reldir}
 
-mkdir -p ${reldir}
-cd ${reldir}
+mkdir -p oqtans_src
+cd oqtans_src
 git init
 git checkout -b master
 echo "This is the source release of Oqtans dependencies version ${version}" > README.git
@@ -44,8 +44,8 @@ git fetch git://github.com/ratschlab/oqtans_src.git master:refs/remotes/origin/m
 git remote add origin git://github.com/ratschlab/oqtans_src.git
 git remote add github git@github.com:ratschlab/oqtans_src.git
 cd ..
-tar cvf ${reldir}.tar ${reldir}
+tar cvf ${reldir}.tar oqtans_src
 bzip2 -v9 ${reldir}.tar
 scp ${reldir}.tar.bz2 raetsch@cbio:~/raetschlab/software/oqtans/
 echo cleanup
-rm -rf ${reldir}
+rm -rf oqtans_src

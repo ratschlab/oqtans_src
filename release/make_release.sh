@@ -23,16 +23,16 @@ do
 	else
 		reldir=oqtans-${version}-${platform}
 	fi
-	if [ -d ${reldir} ] ;
+	if [ -d oqtans ] ;
 	then
-		echo ${reldir} already exists
+		echo oqtans already exists
 		exit -1
 	fi
 	
 	echo ${reldir}
 	
-	mkdir -p ${reldir}
-	cd ${reldir}
+	mkdir -p oqtans
+	cd oqtans
 	git init
 	git checkout -b master
 	if [ "${platform}" == "master" ];
@@ -75,11 +75,11 @@ do
 	git remote add origin git://github.com/ratschlab/oqtans.git
 	git remote add github git@github.com:ratschlab/oqtans.git
 	cd ..
-	tar cvf ${reldir}.tar ${reldir}
+	tar cvf ${reldir}.tar oqtans
 	rm -f ${reldir}.tar.bz2
 	bzip2 -v9 ${reldir}.tar
 	rsync -av ${reldir}.tar.bz2 raetsch@cbio:~/raetschlab/software/oqtans/
 	echo cleanup
-	rm -rf ${reldir}
+	rm -rf oqtans
 	
 done
