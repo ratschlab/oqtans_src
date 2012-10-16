@@ -1,0 +1,10 @@
+This is the source release of Oqtans dependencies version 0.1-beta
+
+Type
+   git checkout master
+to get the source release.
+
+Type
+   git pull origin master
+to obtain updates of the source release.
+
