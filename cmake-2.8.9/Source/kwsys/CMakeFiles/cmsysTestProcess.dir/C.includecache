@@ -1,0 +1,48 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: ^([ 	]*#[ 	]*(include|import)[ 	]*)(KWSYS_HEADER)[ 	]*\(([^),]*)\) KWSYS_HEADER(%)=<cmsys/%>
+
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Source/kwsys/Process.h.in
+@KWSYS_NAMESPACE@/Configure.h
+-
+
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Source/kwsys/kwsysPrivate.h
+cmsys/Directory.hxx
+-
+cmsys/std/vector
+-
+
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Source/kwsys/testProcess.c
+kwsysPrivate.h
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Source/kwsys/kwsysPrivate.h
+cmsys/Process.h
+-
+Process.h.in
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Source/kwsys/Process.h.in
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+windows.h
+-
+unistd.h
+-
+be/kernel/OS.h
+-
+
+Source/cmsys/Configure.h
+
+Source/cmsys/Directory.hxx
+cmsys/Configure.h
+-
+
+Source/cmsys/Process.h
+cmsys/Configure.h
+-
+
