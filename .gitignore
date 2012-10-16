@@ -1,0 +1,9 @@
+*~
+*.o
+*.lo
+.deps
+.libs
+*.pyc
+scipy-0.10.1/build/
+*.la
+lapack-3.4.1/TESTING/*.out
