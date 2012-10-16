@@ -21,7 +21,7 @@ Mac OS X (macports packages with system python v2.7)
      py27-scipy py27-numpy help2man git-core gcc46 texlive
      m4 cmake texinfo R pkgconfig libpng 
      g95 qhull pcre gnuplot fltk-devel hdf5 readline-5
-     qhull GraphicsMagick wget
+     qhull GraphicsMagick wget fftw-3-single hdf5-18 gsed
 
      also set the gcc compiler to gcc46:	
      sudo port select --set gcc mp-gcc46
