@@ -32,22 +32,22 @@ do
 	cd ${reldir}
 	git init
 	git checkout -b master
-	echo "This is the binary release of Oqtans dependencies version ${version}" > README
-	echo >> README
-	echo "Type" >> README
-	echo "   git checkout ${platform}" >> README
-	echo "to get the binary release for platform ${platform}." >> README
-	echo >> README 
-	echo "Type" >> README
-	echo "   git fetch origin ${platform}:refs/remotes/origin/${platform}" >> README
-	echo "to obtain updates for platform ${platform}." >> README
-	echo >> README
-	echo "Type" >> README
-	echo "   git pull origin ${platform}" >> README
-	echo "to download updates for all platforms and to update platform ${platform}." >> README
-	echo >> README
-	git add README
-	git commit -m "added automatically generated README file" 
+	echo "This is the binary release of Oqtans dependencies version ${version}" > README.git
+	echo >> README.git
+	echo "Type" >> README.git
+	echo "   git checkout ${platform}" >> README.git
+	echo "to get the binary release for platform ${platform}." >> README.git
+	echo >> README.git 
+	echo "Type" >> README.git
+	echo "   git fetch origin ${platform}:refs/remotes/origin/${platform}" >> README.git
+	echo "to obtain updates for platform ${platform}." >> README.git
+	echo >> README.git
+	echo "Type" >> README.git
+	echo "   git pull origin ${platform}" >> README.git
+	echo "to download updates for all platforms and to update platform ${platform}." >> README.git
+	echo >> README.git
+	git add README.git
+	git commit -m "added automatically generated README.git file" 
 	git fetch git://github.com/ratschlab/oqtans_dep.git ${platform}:refs/remotes/origin/${platform}
 	git remote add origin git://github.com/ratschlab/oqtans_dep.git
 	git remote add github git@github.com:ratschlab/oqtans_dep.git

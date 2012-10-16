@@ -19,9 +19,9 @@ do
 	
 	if [ "${platform}" == "master" ];
 	then
-		reldir=oqtans_dep-${version}
+		reldir=oqtans-${version}
 	else
-		reldir=oqtans_dep-${version}-${platform}
+		reldir=oqtans-${version}-${platform}
 	fi
 	if [ -d ${reldir} ] ;
 	then
@@ -37,40 +37,40 @@ do
 	git checkout -b master
 	if [ "${platform}" == "master" ];
 	then
-		echo "This is the source release of Oqtans tools version ${version}" > README
+		echo "This is the source release of Oqtans tools version ${version}" > README.git
 	else
-		echo "This is the source/binary release of Oqtans tools version ${version} for platform ${platform}" > README
+		echo "This is the source/binary release of Oqtans tools version ${version} for platform ${platform}" > README.git
 	fi
-	echo >> README
-	echo "Type" >> README
-	echo "   git checkout ${platform}" >> README
+	echo >> README.git
+	echo "Type" >> README.git
+	echo "   git checkout ${platform}" >> README.git
 	if [ "${platform}" == "master" ];
 	then
-		echo "to get the source release files." >> README
+		echo "to get the source release files." >> README.git
 	else
-		echo "to get the source/binary release for platform ${platform}." >> README
+		echo "to get the source/binary release for platform ${platform}." >> README.git
 	fi
-	echo >> README 
-	echo "Type" >> README
-	echo "   git fetch origin ${platform}:refs/remotes/origin/${platform}" >> README
+	echo >> README.git 
+	echo "Type" >> README.git
+	echo "   git fetch origin ${platform}:refs/remotes/origin/${platform}" >> README.git
 	if [ "${platform}" == "master" ];
 	then
-		echo "to obtain source updates." >> README
+		echo "to obtain source updates." >> README.git
 	else
-		echo "to obtain updates for platform ${platform}." >> README
+		echo "to obtain updates for platform ${platform}." >> README.git
 	fi
-	echo >> README
-	echo "Type" >> README
-	echo "   git pull origin ${platform}" >> README
+	echo >> README.git
+	echo "Type" >> README.git
+	echo "   git pull origin ${platform}" >> README.git
 	if [ "${platform}" == "master" ];
 	then
-		echo "to download updates for all platforms and to update the source files." >> README
+		echo "to download updates for all platforms and to update the source files." >> README.git
 	else
-		echo "to download updates for all platforms and to update platform ${platform}." >> README
+		echo "to download updates for all platforms and to update platform ${platform}." >> README.git
 	fi
-	echo >> README
-	git add README
-	git commit -m "added automatically generated README file" 
+	echo >> README.git
+	git add README.git
+	git commit -m "added automatically generated README.git file" 
 	git fetch git://github.com/ratschlab/oqtans.git ${platform}:refs/remotes/origin/${platform}
 	git remote add origin git://github.com/ratschlab/oqtans.git
 	git remote add github git@github.com:ratschlab/oqtans.git
