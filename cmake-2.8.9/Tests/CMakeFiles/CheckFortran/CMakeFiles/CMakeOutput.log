@@ -1,0 +1,138 @@
+The system is: Linux - 2.6.32-308-ec2 - x86_64
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" succeeded.
+Compiler: /usr/bin/f95 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the Fortran compiler identification source "CMakeFortranCompilerId.F" produced "a.out"
+
+The Fortran compiler identification is GNU, found in "/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CompilerIdFortran/a.out"
+
+Determining if the Fortran compiler works passed with the following output:
+Change Dir: /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4207579983/fast"
+make -f CMakeFiles/cmTryCompileExec4207579983.dir/build.make CMakeFiles/cmTryCompileExec4207579983.dir/build
+make[1]: Entering directory `/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp'
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_progress_report /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building Fortran object CMakeFiles/cmTryCompileExec4207579983.dir/testFortranCompiler.f.o
+/usr/bin/f95    -c /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp/testFortranCompiler.f -o CMakeFiles/cmTryCompileExec4207579983.dir/testFortranCompiler.f.o
+Linking Fortran executable cmTryCompileExec4207579983
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4207579983.dir/link.txt --verbose=1
+/usr/bin/f95         CMakeFiles/cmTryCompileExec4207579983.dir/testFortranCompiler.f.o  -o cmTryCompileExec4207579983 -rdynamic 
+make[1]: Leaving directory `/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp'
+
+
+Detecting Fortran compiler ABI info compiled with the following output:
+Change Dir: /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec776800124/fast"
+make -f CMakeFiles/cmTryCompileExec776800124.dir/build.make CMakeFiles/cmTryCompileExec776800124.dir/build
+make[1]: Entering directory `/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp'
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_progress_report /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building Fortran object CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o
+/usr/bin/f95    -c /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Modules/CMakeFortranCompilerABI.F -o CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o
+Linking Fortran executable cmTryCompileExec776800124
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec776800124.dir/link.txt --verbose=1
+/usr/bin/f95   -v     CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o  -o cmTryCompileExec776800124 -rdynamic  
+Driving: /usr/bin/f95 -v CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o -o cmTryCompileExec776800124 -rdynamic -lgfortranbegin -lgfortran -lm -shared-libgcc
+Using built-in specs.
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.4.3-4ubuntu5' --with-bugurl=file:///usr/share/doc/gcc-4.4/README.Bugs --enable-languages=c,c++,fortran,objc,obj-c++ --prefix=/usr --enable-shared --enable-multiarch --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.4 --program-suffix=-4.4 --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-plugin --enable-objc-gc --disable-werror --with-arch-32=i486 --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5) 
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec776800124' '-rdynamic' '-shared-libgcc' '-mtune=generic'
+ /usr/lib/gcc/x86_64-linux-gnu/4.4.3/collect2 --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=both -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec776800124 -z relro /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../.. CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o -lgfortranbegin -lgfortran -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crtn.o
+make[1]: Leaving directory `/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp'
+
+
+Parsed Fortran implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec776800124/fast"]
+  ignore line: [make -f CMakeFiles/cmTryCompileExec776800124.dir/build.make CMakeFiles/cmTryCompileExec776800124.dir/build]
+  ignore line: [make[1]: Entering directory `/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp']
+  ignore line: [/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_progress_report /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building Fortran object CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o]
+  ignore line: [/usr/bin/f95    -c /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Modules/CMakeFortranCompilerABI.F -o CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o]
+  ignore line: [Linking Fortran executable cmTryCompileExec776800124]
+  ignore line: [/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec776800124.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/f95   -v     CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o  -o cmTryCompileExec776800124 -rdynamic  ]
+  ignore line: [Driving: /usr/bin/f95 -v CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o -o cmTryCompileExec776800124 -rdynamic -lgfortranbegin -lgfortran -lm -shared-libgcc]
+  ignore line: [Using built-in specs.]
+  ignore line: [Target: x86_64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 4.4.3-4ubuntu5' --with-bugurl=file:///usr/share/doc/gcc-4.4/README.Bugs --enable-languages=c,c++,fortran,objc,obj-c++ --prefix=/usr --enable-shared --enable-multiarch --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.4 --program-suffix=-4.4 --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-plugin --enable-objc-gc --disable-werror --with-arch-32=i486 --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec776800124' '-rdynamic' '-shared-libgcc' '-mtune=generic']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/4.4.3/collect2 --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=both -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec776800124 -z relro /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crt1.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../.. CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o -lgfortranbegin -lgfortran -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtend.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crtn.o]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/collect2] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=both] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec776800124] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.4.3] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.4.3] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../..]
+    arg [CMakeFiles/cmTryCompileExec776800124.dir/CMakeFortranCompilerABI.F.o] ==> ignore
+    arg [-lgfortranbegin] ==> lib [gfortranbegin]
+    arg [-lgfortran] ==> lib [gfortran]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.4.3]
+  collapse dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3] ==> [/usr/lib/gcc/x86_64-linux-gnu/4.4.3]
+  collapse dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../..] ==> [/usr/lib]
+  implicit libs: [gfortranbegin;gfortran;m;c]
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/4.4.3;/usr/lib;/lib]
+
+
+Determining if the Fortran compiler supports Fortran 90 passed with the following output:
+Change Dir: /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3326296126/fast"
+make -f CMakeFiles/cmTryCompileExec3326296126.dir/build.make CMakeFiles/cmTryCompileExec3326296126.dir/build
+make[1]: Entering directory `/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp'
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_progress_report /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building Fortran object CMakeFiles/cmTryCompileExec3326296126.dir/testFortranCompilerF90.f90.o
+/usr/bin/f95    -c /mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp/testFortranCompilerF90.f90 -o CMakeFiles/cmTryCompileExec3326296126.dir/testFortranCompilerF90.f90.o
+Linking Fortran executable cmTryCompileExec3326296126
+/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Bootstrap.cmk/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3326296126.dir/link.txt --verbose=1
+/usr/bin/f95         CMakeFiles/cmTryCompileExec3326296126.dir/testFortranCompilerF90.f90.o  -o cmTryCompileExec3326296126 -rdynamic 
+make[1]: Leaving directory `/mnt/oqtansTools/oqtans_src/cmake-2.8.9/Tests/CMakeFiles/CheckFortran/CMakeFiles/CMakeTmp'
+
+

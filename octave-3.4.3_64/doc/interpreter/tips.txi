@@ -1,0 +1,790 @@
+@c Copyright (C) 1996-2011 John W. Eaton
+@c
+@c This file is part of Octave.
+@c
+@c Octave is free software; you can redistribute it and/or modify it
+@c under the terms of the GNU General Public License as published by the
+@c Free Software Foundation; either version 3 of the License, or (at
+@c your option) any later version.
+@c 
+@c Octave is distributed in the hope that it will be useful, but WITHOUT
+@c ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+@c FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+@c for more details.
+@c 
+@c You should have received a copy of the GNU General Public License
+@c along with Octave; see the file COPYING.  If not, see
+@c <http://www.gnu.org/licenses/>.
+
+@node Tips and Standards
+@appendix Tips and Standards
+@cindex tips
+@cindex standards of coding style
+@cindex coding standards
+
+This chapter describes no additional features of Octave.  Instead it
+gives advice on making effective use of the features described in the
+previous chapters.
+
+@menu
+* Style Tips::                  Writing clean and robust programs.
+* Coding Tips::                 Making code run faster.
+* Comment Tips::                Conventions for writing comments.
+* Function Headers::            Standard headers for functions.
+* Documentation Tips::          Writing readable documentation strings.
+@end menu
+
+@node Style Tips
+@section Writing Clean Octave Programs
+
+Here are some tips for avoiding common errors in writing Octave code
+intended for widespread use:
+
+@itemize @bullet
+@item
+Since all global variables share the same name space, and all functions
+share another name space, you should choose a short word to distinguish
+your program from other Octave programs.  Then take care to begin the
+names of all global variables, constants, and functions with the chosen
+prefix.  This helps avoid name conflicts.
+
+If you write a function that you think ought to be added to Octave under
+a certain name, such as @code{fiddle_matrix}, don't call it by that name
+in your program.  Call it @code{mylib_fiddle_matrix} in your program,
+and send mail to @email{maintainers@@octave.org} suggesting that it
+be added to Octave.  If and when it is, the name can be changed easily
+enough.
+
+If one prefix is insufficient, your package may use two or three
+alternative common prefixes, so long as they make sense.
+
+Separate the prefix from the rest of the symbol name with an underscore
+@samp{_}.  This will be consistent with Octave itself and with most
+Octave programs.
+
+@item
+When you encounter an error condition, call the function @code{error}
+(or @code{usage}).  The @code{error} and @code{usage} functions do not
+return.
+@xref{Errors}.
+
+@item
+Please put a copyright notice on the file if you give copies to anyone.
+Use the same lines that appear at the top of the function files
+distributed with Octave.  If you have not signed papers to assign the
+copyright to anyone else, then place your name in the copyright notice.
+@end itemize
+
+@node Coding Tips
+@section Tips for Making Code Run Faster.
+@cindex execution speed
+@cindex speedups
+
+Here are some ways of improving the execution speed of Octave programs.
+
+@itemize @bullet
+@item
+Vectorize loops.  For instance, rather than
+
+@example
+@group
+for i = 1:n-1
+  a(i) = b(i+1) - b(i);
+endfor
+@end group
+@end example
+
+@noindent
+write
+
+@example
+a = b(2:n) - b(1:n-1);
+@end example
+
+This is especially important for loops with "cheap" bodies.  Often it suffices
+to vectorize just the innermost loop to get acceptable performance.  A general
+rule of thumb is that the "order" of the vectorized body should be greater or
+equal to the "order" of the enclosing loop.
+
+@item
+Use built-in and library functions if possible.  Built-in and compiled functions
+are very fast.  Even with a m-file library function, chances are good that it is
+already optimized, or will be optimized more in a future release.
+
+For instance, even better than
+
+@example
+a = b(2:n) - b(1:n-1);
+@end example
+
+@noindent
+is
+
+@example
+a = diff (b);
+@end example
+
+
+@item
+Avoid computing costly intermediate results multiple times.  Octave currently
+does not eliminate common subexpressions.
+Also, certain internal computation results are cached for variables.
+For instance, if a matrix variable is used multiple times as an index,
+checking the indices (and internal conversion to integers) is only done once.
+
+@item
+Be aware of lazy copies (copy-on-write).  When a copy of an object
+is created, the data is not immediately copied, but rather shared.  The actual
+copying is postponed until the copied data needs to be modified.  For example:
+
+@example
+@group
+a = zeros (1000); # create a 1000x1000 matrix
+b = a; # no copying done here
+b(1) = 1; # copying done here
+@end group
+@end example
+
+Lazy copying applies to whole Octave objects such as matrices, cells, struct,
+and also individual cell or struct elements (not array elements).
+
+Additionally, index expressions also use lazy copying when Octave can determine
+that the indexed portion is contiguous in memory.  For example:
+
+@example
+@group
+a = zeros (1000); # create a 1000x1000 matrix
+b = a(:,10:100); # no copying done here
+b = a(10:100,:); # copying done here
+@end group
+@end example
+
+This applies to arrays (matrices), cell arrays, and structs indexed using ().
+Index expressions generating cs-lists can also benefit of shallow copying
+in some cases.  In particular, when @var{a} is a struct array, expressions like
+@code{@{a.x@}, @{a(:,2).x@}} will use lazy copying, so that data can be shared
+between a struct array and a cell array.
+
+Most indexing expressions do not live longer than their `parent' objects.
+In rare cases, however, a lazily copied slice outlasts its parent, in which
+case it becomes orphaned, still occupying unnecessarily more memory than needed.
+To provide a remedy working in most real cases,
+Octave checks for orphaned lazy slices at certain situations, when a value
+is stored into a "permanent" location, such as a named variable or cell or
+struct element, and possibly economizes them.  For example:
+
+@example
+@group
+a = zeros (1000); # create a 1000x1000 matrix
+b = a(:,10:100);  # lazy slice
+a = []; # the original a array is still allocated
+c@{1@} = b; # b is reallocated at this point
+@end group
+@end example
+
+@item
+Avoid deep recursion.  Function calls to m-file functions carry a relatively
+significant overhead, so rewriting a recursion as a loop often helps.  Also,
+note that the maximum level of recursion is limited.
+
+@item
+Avoid resizing matrices unnecessarily.  When building a single result
+matrix from a series of calculations, set the size of the result matrix
+first, then insert values into it.  Write
+
+@example
+@group
+result = zeros (big_n, big_m)
+for i = over:and_over
+  r1 = @dots{}
+  r2 = @dots{}
+  result (r1, r2) = new_value ();
+endfor
+@end group
+@end example
+
+@noindent
+instead of
+
+@example
+@group
+result = [];
+for i = ever:and_ever
+  result = [ result, new_value() ];
+endfor
+@end group
+@end example
+
+Sometimes the number of items can't be computed in advance, and stack-like
+operations are needed.  When elements are being repeatedly inserted at/removed
+from the end of an array, Octave detects it as stack usage and attempts to use a
+smarter memory management strategy pre-allocating the array in bigger chunks. 
+Likewise works for cell and struct arrays.
+
+@example
+@group
+a = [];
+while (condition)
+  @dots{}
+  a(end+1) = value; # "push" operation
+  @dots{}
+  a(end) = []; # "pop" operation
+  @dots{}
+endwhile
+@end group
+@end example
+
+@item
+Use @code{cellfun} intelligently.  The @code{cellfun} function is a useful tool
+for avoiding loops.  @xref{Processing Data in Cell Arrays}.
+@code{cellfun} is often used with anonymous function handles; however, calling
+an anonymous function involves an overhead quite comparable to the overhead
+of an m-file function.  Passing a handle to a built-in function is faster,
+because the interpreter is not involved in the internal loop.  For example:
+
+@example
+@group
+a = @{@dots{}@}
+v = cellfun (@@(x) det(x), a); # compute determinants
+v = cellfun (@@det, a); # faster
+@end group
+@end example
+
+@item
+Octave includes a number of other functions that can replace common types of
+loops, including @code{bsxfun}, @code{arrayfun}, @code{structfun},
+@code{accumarray}.  These functions can take an arbitrary function as a handle.
+Be sure to get familiar with them if you want to become an Octave expert.
+
+@item
+Avoid calling @code{eval} or @code{feval} excessively, because
+they require Octave to parse input or look up the name of a function in
+the symbol table.
+
+If you are using @code{eval} as an exception handling mechanism and not
+because you need to execute some arbitrary text, use the @code{try}
+statement instead.  @xref{The @code{try} Statement}.
+
+@item
+If you are calling lots of functions but none of them will need to
+change during your run, set the variable
+@code{ignore_function_time_stamp} to @code{"all"} so that Octave doesn't
+waste a lot of time checking to see if you have updated your function
+files.
+@end itemize
+
+@node Comment Tips
+@section Tips on Writing Comments
+
+Here are the conventions to follow when writing comments.
+
+@table @samp
+@item #
+Comments that start with a single sharp-sign, @samp{#}, should all be
+aligned to the same column on the right of the source code.  Such
+comments usually explain how the code on the same line does its job.  In
+the Emacs mode for Octave, the @kbd{M-;} (@code{indent-for-comment})
+command automatically inserts such a @samp{#} in the right place, or
+aligns such a comment if it is already present.
+
+@item ##
+Comments that start with a double sharp-sign, @samp{##}, should be aligned to
+the same level of indentation as the code.  Such comments usually
+describe the purpose of the following lines or the state of the program
+at that point.
+@end table
+
+@noindent
+The indentation commands of the Octave mode in Emacs, such as @kbd{M-;}
+(@code{indent-for-comment}) and @kbd{TAB} (@code{octave-indent-line})
+automatically indent comments according to these conventions,
+depending on the number of semicolons.  @xref{Comments,,
+Manipulating Comments, emacs, The GNU Emacs Manual}.
+
+@node Function Headers
+@section Conventional Headers for Octave Functions
+@cindex header comments
+
+Octave has conventions for using special comments in function files
+to give information such as who wrote them.  This section explains these
+conventions.
+
+The top of the file should contain a copyright notice, followed by a
+block of comments that can be used as the help text for the function.
+Here is an example:
+
+@example
+## Copyright (C) 1996, 1997, 2007 John W. Eaton
+##
+## This file is part of Octave.
+##
+## Octave is free software; you can redistribute it and/or
+## modify it under the terms of the GNU General Public
+## License as published by the Free Software Foundation;
+## either version 3 of the License, or (at your option) any 
+## later version.
+##
+## Octave is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied
+## warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+## PURPOSE.  See the GNU General Public License for more
+## details.
+##
+## You should have received a copy of the GNU General Public
+## License along with Octave; see the file COPYING.  If not,
+## see <http://www.gnu.org/licenses/>.
+
+## usage: [IN, OUT, PID] = popen2 (COMMAND, ARGS)
+##
+## Start a subprocess with two-way communication.  COMMAND
+## specifies the name of the command to start.  ARGS is an
+## array of strings containing options for COMMAND.  IN and
+## OUT are the file ids of the input and streams for the
+## subprocess, and PID is the process id of the subprocess,
+## or -1 if COMMAND could not be executed.
+##
+## Example:
+##
+##  [in, out, pid] = popen2 ("sort", "-nr");
+##  fputs (in, "these\nare\nsome\nstrings\n");
+##  fclose (in);
+##  while (ischar (s = fgets (out)))
+##    fputs (stdout, s);
+##  endwhile
+##  fclose (out);
+@end example
+
+Octave uses the first block of comments in a function file that do not
+appear to be a copyright notice as the help text for the file.  For
+Octave to recognize the first comment block as a copyright notice, it
+must start with the word `Copyright' after stripping the leading
+comment characters.
+
+After the copyright notice and help text come several @dfn{header
+comment} lines, each beginning with @samp{## @var{header-name}:}.  For
+example,
+
+@example
+@group
+## Author: jwe
+## Keywords: subprocesses input-output
+## Maintainer: jwe
+@end group
+@end example
+
+Here is a table of the conventional possibilities for @var{header-name}:
+
+@table @samp
+@item Author
+This line states the name and net address of at least the principal
+author of the library.
+
+@example
+## Author: John W. Eaton <jwe@@octave.org>
+@end example
+
+@item Maintainer
+This line should contain a single name/address as in the Author line, or
+an address only, or the string @samp{jwe}.  If there is no maintainer
+line, the person(s) in the Author field are presumed to be the
+maintainers.  The example above is mildly bogus because the maintainer
+line is redundant.
+
+The idea behind the @samp{Author} and @samp{Maintainer} lines is to make
+possible a function to ``send mail to the maintainer'' without
+having to mine the name out by hand.
+
+Be sure to surround the network address with @samp{<@dots{}>} if
+you include the person's full name as well as the network address.
+
+@item Created
+This optional line gives the original creation date of the
+file.  For historical interest only.
+
+@item Version
+If you wish to record version numbers for the individual Octave program,
+put them in this line.
+
+@item Adapted-By
+In this header line, place the name of the person who adapted the
+library for installation (to make it fit the style conventions, for
+example).
+
+@item Keywords
+This line lists keywords.  Eventually, it will be used by an apropos
+command to allow people will find your package when they're looking for
+things by topic area.  To separate the keywords, you can use spaces,
+commas, or both.
+@end table
+
+Just about every Octave function ought to have the @samp{Author} and
+@samp{Keywords} header comment lines.  Use the others if they are
+appropriate.  You can also put in header lines with other header
+names---they have no standard meanings, so they can't do any harm.
+
+@node Documentation Tips
+@section Tips for Documentation Strings
+
+As noted above, documentation is typically in a commented header block
+on an Octave function following the copyright statement.  The help string
+shown above is an unformatted string and will be displayed as is by
+Octave.  Here are some tips for the writing of documentation strings.
+
+@itemize @bullet
+@item
+Every command, function, or variable intended for users to know about
+should have a documentation string.
+
+@item
+An internal variable or subroutine of an Octave program might as well have
+a documentation string.
+
+@item
+The first line of the documentation string should consist of one or two
+complete sentences that stand on their own as a summary.
+
+The documentation string can have additional lines that expand on the
+details of how to use the function or variable.  The additional lines
+should also be made up of complete sentences.
+
+@item
+For consistency, phrase the verb in the first sentence of a
+documentation string as an infinitive with ``to'' omitted.  For
+instance, use ``Return the frob of A and B.'' in preference to ``Returns
+the frob of A and B@.''  Usually it looks good to do likewise for the
+rest of the first paragraph.  Subsequent paragraphs usually look better
+if they have proper subjects.
+
+@item
+Write documentation strings in the active voice, not the passive, and in
+the present tense, not the future.  For instance, use ``Return a list
+containing A and B.'' instead of ``A list containing A and B will be
+returned.''
+
+@item
+Avoid using the word ``cause'' (or its equivalents) unnecessarily.
+Instead of, ``Cause Octave to display text in boldface,'' just write
+``Display text in boldface.''
+
+@item
+Use two spaces between the period marking the end of a sentence and the
+word which opens the next sentence.  This convention has no effect for
+typeset formats like @TeX{}, but improves the readability of the documentation
+in fixed-width environments such as the Info reader.
+
+@item
+Do not start or end a documentation string with whitespace.
+
+@item
+Format the documentation string so that it fits within an 80-column screen.
+It is a good idea for most lines to be no wider than 60 characters.
+
+However, rather than simply filling the entire documentation string, you
+can make it much more readable by choosing line breaks with care.
+Use blank lines between topics if the documentation string is long.
+ 
+@item
+@strong{Do not} indent subsequent lines of a documentation string so
+that the text is lined up in the source code with the text of the first
+line.  This looks nice in the source code, but looks bizarre when users
+view the documentation.  Remember that the indentation before the
+starting double-quote is not part of the string!
+
+@item
+When choosing variable names try to adhere to the following guidelines.
+
+@table @asis
+@item 
+vectors : x,y,z,t,w
+
+@item
+matrices : A,B,M
+
+@item
+strings : @nospell{str},s
+
+@item
+filenames : @nospell{fname}
+
+@item
+cells,@nospell{cellstrs} : c,@nospell{cstr}
+@end table
+
+@item
+The documentation string for a variable that is a yes-or-no flag should
+start with words such as ``Nonzero means@dots{}'', to make it clear that
+all nonzero values are equivalent and indicate explicitly what zero and
+nonzero mean.
+
+@item
+When a function's documentation string mentions the value of an argument
+of the function, use the argument name in capital letters as if it were
+a name for that value.  Thus, the documentation string of the operator
+@code{/} refers to its second argument as @samp{DIVISOR}, because the
+actual argument name is @code{divisor}.
+
+Also use all caps for meta-syntactic variables, such as when you show
+the decomposition of a list or vector into subunits, some of which may
+vary.
+@end itemize
+
+Octave also allows extensive formatting of the help string of functions
+using Texinfo.  The effect on the online documentation is relatively
+small, but makes the help string of functions conform to the help of
+Octave's own functions.  However, the effect on the appearance of printed
+or online documentation will be greatly improved.
+
+The fundamental building block of Texinfo documentation strings is the
+Texinfo-macro @code{@@deftypefn}, which takes three arguments: The class
+the function is in, its output arguments, and the function's
+signature.  Typical classes for functions include @code{Function File}
+for standard Octave functions, and @code{Loadable Function} for
+dynamically linked functions.  A skeletal Texinfo documentation string
+therefore looks like this
+
+@example
+@group
+-*- texinfo -*-
+@@deftypefn@{Function File@} @{@@var@{ret@} =@} fn (@dots{})
+@@cindex index term
+Help text in Texinfo format.  Code samples should be marked 
+like @@code@{sample of code@} and variables should be marked
+as @@var@{variable@}.
+@@seealso@{fn2@}
+@@end deftypefn
+@end group
+@end example
+
+This help string must be commented in user functions, or in the help
+string of the @w{@code{DEFUN_DLD}} macro for dynamically loadable
+functions.  The important aspects of the documentation string are
+
+@table @asis
+@item -*- @nospell{texinfo} -*-
+This string signals Octave that the following text is in Texinfo format,
+and should be the first part of any help string in Texinfo format.
+
+@item @@deftypefn@{class@} @dots{} @@end deftypefn
+The entire help string should be enclosed within the block defined by
+deftypefn.
+
+@item @@cindex index term
+This generates an index entry, and can be useful when the function is
+included as part of a larger piece of documentation.  It is ignored
+within Octave's help viewer.  Only one index term may appear per line
+but multiple @@cindex lines are valid if the function should be 
+filed under different terms.
+
+@item @@var@{variable@}
+All variables should be marked with this macro.  The markup of variables
+is then changed appropriately for display.
+
+@item @@code@{sample of code@}
+All samples of code should be marked with this macro for the same
+reasons as the @@var macro.
+
+@item @@seealso@{function2@}
+This is a comma separated list of function names that allows cross
+referencing from one function documentation string to another.
+@end table
+
+Texinfo format has been designed to generate output for online viewing
+with text terminals as well as generating high-quality printed output.
+To these ends, Texinfo has commands which control the diversion of parts
+of the document into a particular output processor.  Three formats are
+of importance: info, HTML and @TeX{}.  These are selected with
+
+@example
+@group
+@@ifinfo
+Text area for info only
+@@end ifinfo
+@end group
+@end example
+
+@example
+@group
+@@ifhtml
+Text area for HTML only
+@@end ifhtml
+@end group
+@end example
+
+@example
+@group
+@@tex
+Text area for TeX only
+@@end tex
+@end group
+@end example
+
+Note that often @TeX{} output can be used in HTML documents and so often
+the @code{@@ifhtml} blocks are unnecessary.  If no specific output
+processor is chosen, by default, the text goes into all output
+processors.  It is usual to have the above blocks in pairs to allow the
+same information to be conveyed in all output formats, but with a
+different markup.  Currently, most Octave documentation only makes a
+distinction between @TeX{} and all other formats.  Therefore, the
+following construct is seen repeatedly.
+
+@example
+@group
+@@tex
+text for TeX only
+@@end tex
+@@ifnottex
+text for info, HTML, plaintext
+@@end ifnottex
+@end group
+@end example
+
+Another important feature of Texinfo that is often used in Octave help
+strings is the @code{@@example} environment.  An example of its use is
+
+@example
+@group
+@@example
+@@group
+@@code@{2 * 2@}
+@@result@{@} 4
+@@end group
+@@end example
+@end group
+@end example
+
+@noindent
+which produces
+
+@example
+@group
+@code{2 * 2}
+@result{} 4
+@end group
+@end example
+
+The @code{@@group} block prevents the example from being split across a
+page boundary, while the @code{@@result@{@}} macro produces a right
+arrow signifying the result of a command.  If your example is larger than
+20 lines it is better NOT to use grouping so that a reasonable page boundary
+can be calculated.
+
+In many cases a function has multiple ways in which it can be called,
+and the @code{@@deftypefnx} macro can be used to give alternatives.  For
+example
+
+@example
+@group
+-*- texinfo -*-
+@@deftypefn @{Function File@} @{@@var@{a@} =@} fn (@@var@{x@}, @dots{})
+@@deftypefnx@{Function File@} @{@@var@{a@} =@} fn (@@var@{y@}, @dots{})
+Help text in Texinfo format.
+@@end deftypefn
+@end group
+@end example
+
+Many complete examples of Texinfo documentation can be taken from the
+help strings for the Octave functions themselves.  A relatively complete
+example of which is the @code{nchoosek} function.  The Texinfo
+documentation string for @code{nchoosek} is
+
+@example
+-*- texinfo -*-
+@@deftypefn @{Function File@} @{@} nchoosek (@@var@{n@}, @@var@{k@})
+
+Compute the binomial coefficient or all combinations of 
+@@var@{n@}.  If @@var@{n@} is a scalar then, calculate the
+binomial coefficient of @@var@{n@} and @@var@{k@}, defined as
+
+@@tex
+$$
+ @{n \choose k@} = @{n (n-1) (n-2) \cdots (n-k+1) \over k!@}
+$$
+@@end tex
+@@ifnottex
+
+@@example
+@@group
+ /   \
+ | n |    n (n-1) (n-2) @dots{} (n-k+1)
+ |   |  = -------------------------
+ | k |               k!
+ \   /
+@@end group
+@@end example
+@@end ifnottex
+
+If @@var@{n@} is a vector, this generates all combinations
+of the elements of @@var@{n@}, taken @@var@{k@} at a time,
+one row per combination.  The resulting @@var@{c@} has size
+@@code@{[nchoosek (length (@@var@{n@}),@@var@{k@}), @@var@{k@}]@}.
+
+@@code@{nchoosek@} works only for non-negative integer arguments; use
+@@code@{bincoeff@} for non-integer scalar arguments and for using vector
+arguments to compute many coefficients at once.
+
+@@seealso@{bincoeff@}
+@@end deftypefn
+@end example
+
+which demonstrates most of the concepts discussed above.
+@iftex
+This documentation string renders as
+
+@c Note actually use the output of info below rather than try and 
+@c reproduce it here to prevent it looking different than how it would
+@c appear with info.
+@example
+@group
+ -- Function File: C = nchoosek (N, K)
+     Compute the binomial coefficient or all combinations
+     of N.  If N is a scalar then, calculate the binomial
+     coefficient of N and K, defined as
+
+           /   \
+           | n |    n (n-1) (n-2) @dots{} (n-k+1)       n!
+           |   |  = ------------------------- =  ---------
+           | k |               k!                k! (n-k)!
+           \   /
+
+     If N is a vector generate all combinations of the
+     elements of N, taken K at a time, one row per
+     combination.  The resulting C has size `[nchoosek
+     (length (N), K), K]'.
+
+     `nchoosek' works only for non-negative integer
+     arguments; use `bincoeff' for non-integer scalar 
+     arguments and for using vector arguments to compute
+     many coefficients at once.
+
+     See also: bincoeff.
+@end group
+@end example
+
+using info, whereas in a printed documentation using @TeX{} it will appear
+as
+
+@deftypefn {Function File} {@var{c} =} nchoosek (@var{n}, @var{k})
+
+Compute the binomial coefficient or all combinations of @var{n}.
+If @var{n} is a scalar then, calculate the binomial coefficient
+of @var{n} and @var{k}, defined as
+
+@tex
+$$
+ {n \choose k} = {n (n-1) (n-2) \cdots (n-k+1) \over k!}
+$$
+@end tex
+
+If @var{n} is a vector generate all combinations of the elements
+of @var{n}, taken @var{k} at a time, one row per combination.  The 
+resulting @var{c} has size @code{[nchoosek (length (@var{n}), 
+@var{k}), @var{k}]}.
+
+@code{nchoosek} works only for non-negative integer arguments; use
+@code{bincoeff} for non-integer scalar arguments and for using vector
+arguments to compute many coefficients at once.
+
+@seealso{bincoeff}
+@end deftypefn
+
+@end iftex
