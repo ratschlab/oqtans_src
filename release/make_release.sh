@@ -71,9 +71,15 @@ do
 	echo >> README.git
 	git add README.git
 	git commit -m "added automatically generated README.git file" 
-	git fetch git://github.com/ratschlab/oqtans.git ${platform}:refs/remotes/origin/${platform}
+	git tag -a README.git -m "This version only contains README.git" 
+	git checkout master
+
+	git pull --no-edit git://github.com/ratschlab/oqtans.git ${platform}:refs/remotes/origin/${platform}
 	git remote add origin git://github.com/ratschlab/oqtans.git
 	git remote add github git@github.com:ratschlab/oqtans.git
+
+	git checkout README.git
+
 	cd ..
 	tar cvf ${reldir}.tar oqtans
 	rm -f ${reldir}.tar.bz2
