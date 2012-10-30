@@ -269,3 +269,4 @@ swig-2.0.8/CCache/config.log
 swig-2.0.8/autom4te.cache 
 swig-2.0.8/config.log 
 swig-2.0.8/config.status 
+release/*.tar.bz2
