@@ -577,6 +577,14 @@ class CWeightedDegreePositionStringKernel: public CStringKernel<char>
 			float64_t* poim_result, int32_t num_suppvec, int32_t* IDX,
 			float64_t* alphas, float64_t* distrib);
 
+		/** prepare POIM3
+		 *
+		 * @param num_feat number of features
+		 * @param num_sym number of symbols
+		 */
+		void prepare_POIM3(
+			int32_t num_sym, int32_t num_feat);
+
 		/** prepare POIM2
 		 *
 		 * @param num_feat number of features
@@ -600,6 +608,10 @@ class CWeightedDegreePositionStringKernel: public CStringKernel<char>
 		 * @param result_len (returned)
 		 */
 		void get_POIM2(float64_t** poim, int32_t* result_len);
+
+		int32_t get_POIM3_len() ;
+		float64_t get_POIM3_elem(int32_t elem) ;
+
 
 		/// cleanup POIM2
 		void cleanup_POIM2();
