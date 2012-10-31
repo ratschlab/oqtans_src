@@ -14,7 +14,8 @@ then
 	opts="--without-framework-carbon --enable-64"
     fi
     export LD_LIBRARY_PATH=$OQTANS_DEP_PATH/lib
-    ./configure LD_LIBRARY_PATH=$OQTANS_DEP_PATH/lib CPPFLAGS="-I$OQTANS_DEP_PATH/include" LIBS="-L$OQTANS_DEP_PATH/lib/ -L/opt/local/lib" LDFLAGS="-L$OQTANS_DEP_PATH/lib/ -L/opt/local/lib" F77=gfortran --prefix=$OQTANS_DEP_PATH/octave-3.4.3  --with-glpk-includedir=$OQTANS_DEP_PATH/include --with-glpk-libdir=$OQTANS_DEP_PATH/lib  --with-qhull-includedir=$OQTANS_DEP_PATH/include/ --with-qhull-libdir=$OQTANS_DEP_PATH/lib --with-qrupdate-libdir=$OQTANS_DEP_PATH/lib/ --with-qrupdate-includedir=$OQTANS_DEP_PATH/include/ $opts --without-umfpack 
+    ./configure LD_LIBRARY_PATH=$OQTANS_DEP_PATH/lib CPPFLAGS="-I$OQTANS_DEP_PATH/include" LIBS="-L$OQTANS_DEP_PATH/lib/ -L/opt/local/lib" LDFLAGS="-L$OQTANS_DEP_PATH/lib/ -L/opt/local/lib" F77=gfortran --prefix=$OQTANS_DEP_PATH/octave-3.4.3  --with-glpk-includedir=$OQTANS_DEP_PATH/include --with-glpk-libdir=$OQTANS_DEP_PATH/lib  --with-qhull-includedir=$OQTANS_DEP_PATH/include/ --with-qhull-libdir=$OQTANS_DEP_PATH/lib --with-qrupdate-libdir=$OQTANS_DEP_PATH/lib/ --with-qrupdate-includedir=$OQTANS_DEP_PATH/include/ $opts --with-umfpack="-lumfpack -lsuitesparseconfig"  --with-umfpack-libdir=$OQTANS_DEP_PATH/lib/ --with-umfpack-includedir=$OQTANS_DEP_PATH/include/
+#--without-umfpack 
     
     LD_LIBRARY_PATH=$OQTANS_DEP_PATH/lib make -j 1
     
