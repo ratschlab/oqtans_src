@@ -1,4 +1,4 @@
-This is /home/jwe/src/octave-stable/doc/liboctave/liboctave.info, produced by makeinfo version 4.13 from /home/jwe/src/octave-stable/doc/liboctave/liboctave.texi.
+This is liboctave.info, produced by makeinfo version 4.13 from liboctave.texi.
 
 START-INFO-DIR-ENTRY
 * liboctave: (liboctave). Octave C++ Classes
@@ -3160,33 +3160,33 @@ Function Index
 
 
 Tag Table:
-Node: Top860
-Node: Acknowledgements1871
-Node: Contributors2087
-Node: Copying2387
-Node: Introduction39939
-Node: Arrays40190
-Node: Constructors and Assignment40358
-Node: Matrix and Vector Operations48700
-Node: Matrix Factorizations80246
-Node: Ranges86615
-Node: Nonlinear Functions87313
-Node: Nonlinear Equations87861
-Node: Optimization88796
-Node: Objective Functions89075
-Node: Bounds89672
-Node: Linear Constraints90787
-Node: Nonlinear Constraints91780
-Node: Quadratic Programming92177
-Node: Nonlinear Programming93789
-Node: Quadrature95327
-Node: Collocation Weights97034
-Node: Ordinary Differential Equations98333
-Node: Differential Algebraic Equations99874
-Node: Error Handling100680
-Node: Installation100836
-Node: Bugs100960
-Node: Concept Index101067
-Node: Function Index104431
+Node: Top776
+Node: Acknowledgements1787
+Node: Contributors2003
+Node: Copying2303
+Node: Introduction39855
+Node: Arrays40106
+Node: Constructors and Assignment40274
+Node: Matrix and Vector Operations48616
+Node: Matrix Factorizations80162
+Node: Ranges86531
+Node: Nonlinear Functions87229
+Node: Nonlinear Equations87777
+Node: Optimization88712
+Node: Objective Functions88991
+Node: Bounds89588
+Node: Linear Constraints90703
+Node: Nonlinear Constraints91696
+Node: Quadratic Programming92093
+Node: Nonlinear Programming93705
+Node: Quadrature95243
+Node: Collocation Weights96950
+Node: Ordinary Differential Equations98249
+Node: Differential Algebraic Equations99790
+Node: Error Handling100596
+Node: Installation100752
+Node: Bugs100876
+Node: Concept Index100983
+Node: Function Index104347
 
 End Tag Table

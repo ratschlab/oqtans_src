@@ -1,5 +1,5 @@
-/* C++ code produced by gperf version 3.0.3 */
-/* Command-line: gperf -t -C -D -G -L C++ -Z octave_kw_hash /home/jwe/src/octave-stable/src/octave.gperf  */
+/* C++ code produced by gperf version 3.0.4 */
+/* Command-line: gperf -t -C -D -G -L C++ -Z octave_kw_hash octave.gperf  */
 /* Computed positions: -k'1,5' */
 
 #if !((' ' == 32) && ('!' == 33) && ('"' == 34) && ('#' == 35) \
@@ -29,7 +29,7 @@
 #error "gperf generated tables don't work with this execution character set. Please report a bug to <bug-gnu-gperf@gnu.org>."
 #endif
 
-#line 1 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 1 "octave.gperf"
 
 /*
 
@@ -99,7 +99,7 @@ enum octave_kw_id
   unwind_protect_cleanup_kw,
   while_kw
 };
-#line 71 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 71 "octave.gperf"
 struct octave_kw { const char *name; int tok; octave_kw_id kw_id; };
 
 #define TOTAL_KEYWORDS 41
@@ -168,87 +168,87 @@ octave_kw_hash::hash (register const char *str, register unsigned int len)
 
 static const struct octave_kw wordlist[] =
   {
-#line 78 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 78 "octave.gperf"
     {"do", DO, do_kw},
-#line 81 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 81 "octave.gperf"
     {"end", END, end_kw},
-#line 79 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 79 "octave.gperf"
     {"else", ELSE, else_kw},
-#line 111 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 111 "octave.gperf"
     {"while", WHILE, while_kw},
-#line 86 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 86 "octave.gperf"
     {"endfor", END, endfor_kw},
-#line 98 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 98 "octave.gperf"
     {"if", IF, if_kw},
-#line 92 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 92 "octave.gperf"
     {"endwhile", END, endwhile_kw},
-#line 91 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 91 "octave.gperf"
     {"endswitch", END, endswitch_kw},
-#line 89 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 89 "octave.gperf"
     {"endmethods", END, endmethods_kw},
-#line 80 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 80 "octave.gperf"
     {"elseif", ELSEIF, elseif_kw},
-#line 99 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 99 "octave.gperf"
     {"methods", METHODS, methods_kw},
-#line 104 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 104 "octave.gperf"
     {"set", SET, set_kw},
-#line 74 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 74 "octave.gperf"
     {"case", CASE, case_kw},
-#line 75 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 75 "octave.gperf"
     {"catch", CATCH, catch_kw},
-#line 84 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 84 "octave.gperf"
     {"endclassdef", END, endclassdef_kw },
-#line 94 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 94 "octave.gperf"
     {"for", FOR, for_kw},
-#line 85 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 85 "octave.gperf"
     {"endevents", END, endevents_kw},
-#line 88 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 88 "octave.gperf"
     {"endif", END, endif_kw},
-#line 105 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 105 "octave.gperf"
     {"static", STATIC, static_kw},
-#line 77 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 77 "octave.gperf"
     {"continue", CONTINUE, continue_kw},
-#line 102 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 102 "octave.gperf"
     {"properties", PROPERTIES, properties_kw},
-#line 106 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 106 "octave.gperf"
     {"switch", SWITCH, switch_kw},
-#line 76 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 76 "octave.gperf"
     {"classdef", CLASSDEF, classdef_kw},
-#line 101 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 101 "octave.gperf"
     {"persistent", STATIC, static_kw},
-#line 107 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 107 "octave.gperf"
     {"try", TRY, try_kw},
-#line 100 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 100 "octave.gperf"
     {"otherwise", OTHERWISE, otherwise_kw},
-#line 73 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 73 "octave.gperf"
     {"break", BREAK, break_kw},
-#line 93 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 93 "octave.gperf"
     {"events", EVENTS, events_kw},
-#line 90 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 90 "octave.gperf"
     {"endproperties", END, endproperties_kw},
-#line 108 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 108 "octave.gperf"
     {"until", UNTIL, until_kw},
-#line 87 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 87 "octave.gperf"
     {"endfunction", END, endfunction_kw},
-#line 82 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 82 "octave.gperf"
     {"end_try_catch", END, end_try_catch_kw},
-#line 109 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 109 "octave.gperf"
     {"unwind_protect", UNWIND, unwind_protect_kw},
-#line 83 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 83 "octave.gperf"
     {"end_unwind_protect", END, end_unwind_protect_kw},
-#line 110 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 110 "octave.gperf"
     {"unwind_protect_cleanup", CLEANUP, unwind_protect_cleanup_kw},
-#line 95 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 95 "octave.gperf"
     {"function", FCN, function_kw},
-#line 103 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 103 "octave.gperf"
     {"return", FUNC_RET, return_kw},
-#line 96 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 96 "octave.gperf"
     {"get", GET, get_kw},
-#line 97 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 97 "octave.gperf"
     {"global", GLOBAL, global_kw},
-#line 113 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 113 "octave.gperf"
     {"__LINE__", NUM, magic_line_kw},
-#line 112 "/home/jwe/src/octave-stable/src/octave.gperf"
+#line 112 "octave.gperf"
     {"__FILE__", DQ_STRING, magic_file_kw}
   };
 

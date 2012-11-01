@@ -1,4 +1,4 @@
-@set UPDATED 9 October 2012
+@set UPDATED 29 October 2012
 @set UPDATED-MONTH October 2012
 @set EDITION 2.5.37
 @set VERSION 2.5.37
