@@ -13,7 +13,7 @@ fi
 echo $basedir
 cd $basedir
 
-source ../oqtans_conf.sh
+source ./../../oqtans_config.sh
 
 reldir=oqtans_src-${version}
 if [ -d oqtans_src ] ;

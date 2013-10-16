@@ -17,7 +17,7 @@ do
 	echo $basedir
 	cd $basedir
 	
-	source ../oqtans_conf.sh
+	source ./../../oqtans_conf.sh
 	
 	reldir=oqtans_dep-${version}-${platform}
 	if [ -d oqtans_dep ] ;
