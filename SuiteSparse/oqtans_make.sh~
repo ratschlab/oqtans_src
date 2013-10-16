@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cd export prefix64=/mnt/galaxyTools/tools/oqtans_src/sw_require
-export prefix64=/mnt/galaxyTools/tools/oqtans/sw_require
