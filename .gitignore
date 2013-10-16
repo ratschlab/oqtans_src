@@ -8,7 +8,6 @@
 .libs
 ARPACK/libarpack_SUN4.a
 BLAS/blas_LINUX.a
-R-2.14.1/NEWS.pdf
 SuiteSparse/AMD/Demo/amd_demo
 SuiteSparse/AMD/Demo/amd_demo2
 SuiteSparse/AMD/Demo/amd_l_demo
@@ -198,11 +197,6 @@ lapack-3.4.1/TESTING/*.out
 lapack-3.4.1/TESTING/testing_results.txt
 lapack-3.4.1/liblapack.a
 lapack-3.4.1/libtmglib.a
-numpy-1.6.2/build/lib.linux-x86_64-2.6/numpy/core/_dotblas.so
-numpy-1.6.2/build/lib.linux-x86_64-2.7/
-numpy-1.6.2/build/scripts.linux-x86_64-2.7/
-numpy-1.6.2/build/src.linux-x86_64-2.7/
-numpy-1.6.2/build/temp.linux-x86_64-2.7/
 octave-3.4.3_64/\[config.h\].in
 octave-3.4.3_64/autom4te.cache/
 octave-3.4.3_64/autom4te.cache/
@@ -263,7 +257,6 @@ samtools/misc/md5sum-lite
 samtools/misc/seqtk
 samtools/misc/wgsim
 samtools/samtools
-scipy-0.10.1/build/
 swig-2.0.8/CCache/autom4te.cache 
 swig-2.0.8/CCache/config.log 
 swig-2.0.8/autom4te.cache 
