@@ -1,4 +1,0 @@
-+-----------------------------+
-| Image unavailable because   |
-| of a missing QHULL library. |
-+-----------------------------+
