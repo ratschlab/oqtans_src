@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version=0.1-beta
-for platform in master osx-10.7.4 ubuntu-12.04 ubuntu-10.04 redhat-6.3 ;
+for platform in master osx-10.7.4 ubuntu-12.04 redhat-6.3 ;
 do
 
 	set -e
@@ -15,7 +15,7 @@ do
 	echo $basedir
 	cd $basedir
 	
-	source ../oqtans_conf.sh
+	source ./../../oqtans_config.sh
 	
 	if [ "${platform}" == "master" ];
 	then
